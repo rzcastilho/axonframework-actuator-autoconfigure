@@ -1,9 +1,9 @@
 package com.github.rzcastilho.axonframework.actuate.autoconfigure;
 
 import com.github.rzcastilho.axonframework.actuate.AxonServerHealthIndicator;
-import io.axoniq.axonserver.connector.AxonServerConnection;
 import java.util.Map;
-import org.axonframework.spring.config.AxonConfiguration;
+import org.axonframework.axonserver.connector.AxonServerConnectionManager;
+import org.axonframework.springboot.autoconfig.AxonAutoConfiguration;
 import org.axonframework.springboot.autoconfig.AxonServerAutoConfiguration;
 import org.springframework.boot.actuate.autoconfigure.health.CompositeHealthContributorConfiguration;
 import org.springframework.boot.actuate.autoconfigure.health.ConditionalOnEnabledHealthIndicator;
@@ -19,16 +19,16 @@ import org.springframework.context.annotation.Configuration;
  * {@link org.springframework.boot.autoconfigure.EnableAutoConfiguration Auto-Configuration} for {@link AxonServerHealthIndicator}
  */
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass(AxonConfiguration.class)
-@ConditionalOnBean(AxonConfiguration.class)
+@ConditionalOnClass(AxonServerConnectionManager.class)
+@ConditionalOnBean(AxonServerConnectionManager.class)
 @ConditionalOnEnabledHealthIndicator("axonserver")
-@AutoConfigureAfter({AxonServerAutoConfiguration.class})
-public class AxonServerHealthContributorAutoConfiguration extends CompositeHealthContributorConfiguration<AxonServerHealthIndicator, AxonConfiguration> {
+@AutoConfigureAfter({AxonAutoConfiguration.class, AxonServerAutoConfiguration.class})
+public class AxonServerHealthContributorAutoConfiguration extends CompositeHealthContributorConfiguration<AxonServerHealthIndicator, AxonServerConnectionManager> {
 
     @Bean
     @ConditionalOnMissingBean(name = {"axonServerHealthIndicator", "axonServerHealthContributor"})
-    public HealthContributor axonServerHealthContributor(Map<String, AxonConfiguration> axonConfigurations) {
-        return createContributor(axonConfigurations);
+    public HealthContributor axonServerHealthContributor(Map<String, AxonServerConnectionManager> axonServerConnectionManagers) {
+        return createContributor(axonServerConnectionManagers);
     }
 
 }
