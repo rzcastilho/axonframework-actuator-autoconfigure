@@ -18,8 +18,8 @@ import org.springframework.context.annotation.Configuration;
  * {@link org.springframework.boot.autoconfigure.EnableAutoConfiguration Auto-Configuration} for {@link AxonServerHealthIndicator}
  */
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnClass(AxonServerConnection.class)
-@ConditionalOnBean(AxonServerConnection.class)
+//@ConditionalOnClass(AxonServerConnection.class)
+//@ConditionalOnBean(AxonServerConnection.class)
 @ConditionalOnEnabledHealthIndicator("axonserver")
 @AutoConfigureAfter({AxonServerAutoConfiguration.class})
 public class AxonServerHealthContributorAutoConfiguration extends CompositeHealthContributorConfiguration<AxonServerHealthIndicator, AxonServerConnection> {
