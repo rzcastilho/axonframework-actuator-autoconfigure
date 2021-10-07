@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.github.rzcastilho.axonframework'
-version '1.0-SNAPSHOT'
+version '0.1.0'
 
 repositories {
     mavenCentral()
@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'com.github.rzcastilho', name: 'axonframework-actuator', version: 'd0ef563'
+    implementation group: 'com.github.rzcastilho', name: 'axonframework-actuator', version: '0.1.0'
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.5.5'
     implementation group: 'org.axonframework', name: 'axon-spring-boot-starter', version: '4.5.3'
     testImplementation group: 'org.springframework.boot', name: 'spring-boot-test', version: '2.5.5'
